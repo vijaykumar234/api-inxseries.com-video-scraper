@@ -35,6 +35,12 @@ app.get("/video", async (req, res) => {
         // Find video src
         const videoSrc = $("video#my-video").attr("src") || $("video").attr("src");
 
+
+        if (!videoSrc) {
+    videoSrc = $('video#my-video source[type="video/mp4"]').attr('src') 
+            || $('video source[type="video/mp4"]').attr('src') 
+            || null;
+}
         if (!videoSrc) {
             return res.status(404).json({ error: "Video not found" });
         }
